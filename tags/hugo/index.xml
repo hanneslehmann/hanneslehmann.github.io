@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Hannes Lehmann</title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/tags/hugo/index.xml/</link>
+    <language>en-us</language>
+    <author>Hannes Lehmann</author>
+    <copyright>2014 Hannes Lehmann</copyright>
+    <updated>Wed, 19 Nov 2014 00:00:00 UTC</updated>
+    
+    
+    <item>
+      <title>Hello Hugo!</title>
+      <link>http://localhost:1313/2014/11/hello-hugo/</link>
+      <pubDate>Wed, 19 Nov 2014 00:00:00 UTC</pubDate>
+      <author>Hannes Lehmann</author>
+      <guid>http://localhost:1313/2014/11/hello-hugo/</guid>
+      <description>
+
+&lt;p&gt;Hello from Hugo! And hello from Hannes! This is my first blog entry, realized thanks to Hugo; written in Markdown.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Hugo&lt;/h2&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a the link to &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_1&#34;&gt;Showing off with Markdown&lt;/h2&gt;
+
+&lt;p&gt;A full cheat sheet can be found &lt;a href=&#34;https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet&#34;&gt;here&lt;/a&gt;
+or through &lt;a href=&#34;https://google.com/&#34;&gt;Google&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;There are some &lt;em&gt;easy&lt;/em&gt; examples for styling, though. I can&amp;rsquo;t &lt;strong&gt;emphasize&lt;/strong&gt; that enough.
+Creating &lt;a href=&#34;https://google.com/&#34;&gt;links&lt;/a&gt; or &lt;code&gt;inline code&lt;/code&gt; blocks are very straightforward.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;There are some *easy* examples for styling, though. I can&#39;t **emphasize** that enough.
+Creating [links](https://google.com/) or `inline code` blocks are very straightforward.
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    
+  </channel>
+</rss>
