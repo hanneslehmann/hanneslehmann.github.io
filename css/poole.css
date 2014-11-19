@@ -237,6 +237,11 @@ tbody tr:nth-child(odd) th {
 }
 
 
+.fa-tibbr-square:before {
+    content: url("tibbr-icon.png");
+}
+
+
 /*
  * Messages
  *
