@@ -3,7 +3,7 @@
   <channel>
       <title>Hannes Lehmann</title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://hanneslehmann.github.io/index.xml/</link>
+    <link>http://hanneslehmann.github.io:1313/index.xml/</link>
     <language>en-us</language>
     <author>Hannes Lehmann</author>
     <copyright>2014 Hannes Lehmann</copyright>
@@ -14,10 +14,10 @@
     
     <item>
       <title>Hello Hugo!</title>
-      <link>http://hanneslehmann.github.io/2014/11/hello-hugo/</link>
+      <link>http://hanneslehmann.github.io:1313/2014/11/hello-hugo/</link>
       <pubDate>Wed, 19 Nov 2014 00:00:00 UTC</pubDate>
       <author>Hannes Lehmann</author>
-      <guid>http://hanneslehmann.github.io/2014/11/hello-hugo/</guid>
+      <guid>http://hanneslehmann.github.io:1313/2014/11/hello-hugo/</guid>
       <description>
 
 &lt;p&gt;Hello from Hugo! And hello from Hannes! This is my first blog entry, realized thanks to Hugo; written in Markdown.&lt;/p&gt;
