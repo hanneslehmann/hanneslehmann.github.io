@@ -7,7 +7,9 @@
     <language>en-us</language>
     <author>Hannes Lehmann</author>
     <copyright>2014 Hannes Lehmann</copyright>
-    <updated>Wed, 19 Nov 2014 00:00:00 UTC</updated>
+    <updated>Thu, 20 Nov 2014 00:00:00 UTC</updated>
+    
+    
     
     
     <item>
@@ -23,11 +25,6 @@
 &lt;h2 id=&#34;toc_0&#34;&gt;Hugo&lt;/h2&gt;
 
 &lt;p&gt;Here&amp;rsquo;s a the link to &lt;a href=&#34;http://gohugo.io/&#34;&gt;Hugo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I needed to remove the port &amp;ldquo;&amp;rdquo; which was attached in several URLs scattered through a bunch of files. Following command helped me with sed on linux to remove the string from all files.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;find . -type f -not -iwholename &#39;*.git*&#39; -print0  | xargs -0 sed -i&#39;&#39; -e &#39;s///&#39;
-&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;I will optimize my build process (make file already created) and will post findings here and in GitHub.&lt;/p&gt;
 

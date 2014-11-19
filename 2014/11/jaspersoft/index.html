@@ -10,7 +10,7 @@
   
 
 
-  <title> Blog  &middot; Hannes Lehmann </title>
+  <title> Hello Hugo!  &middot; Hannes Lehmann </title>
 
   
   <link rel="stylesheet" href="http://hanneslehmann.github.io/css/poole.css">
@@ -23,7 +23,7 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   
-  <link href="http://hanneslehmann.github.io/tags/blog/index.xml/" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
+  <link href="" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
@@ -74,27 +74,54 @@
   </div>
 </div>
 
-   <div class="content container">
-   
-    
-    
+
+<div class="content container">
+<div class="post">
+  <h1 class="post-title">Hello Hugo!</h1>
+  <span class="post-date">Thu, Nov 20, 2014</span>
       
-    
-      
-        
-      
-    
+
+<p>Hello from Hugo! And hello from Hannes! This is my first blog entry, realized thanks to Hugo; written in Markdown.</p>
+
+<h2 id="toc_0">Hugo</h2>
+
+<p>Here&rsquo;s a the link to <a href="http://gohugo.io/">Hugo</a>.</p>
+
+<p>I needed to remove the port &ldquo;:1313&rdquo; which was attached in several URLs scattered through a bunch of files. Following command helped me with sed on linux to remove the string from all files.</p>
+
+<pre><code>find . -type f -not -iwholename '*.git*' -print0  | xargs -0 sed -i'' -e 's/:1313//'
+</code></pre>
+
+<p>I will optimize my build process (make file already created) and will post findings here and in GitHub.</p>
+
+<h2 id="toc_1">Showing off with Markdown</h2>
+
+<p>A full cheat sheet can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a>
+or through <a href="https://google.com/">Google</a>.</p>
+
+<h2 id="toc_2">Hosted on GitHub</h2>
+
+<p>How a page in GitHub can be hosted is described <a href="https://pages.github.com/">here</a>. It&rsquo;s so easy and fast to publish pages via git pull/add/commit/push!</p>
 
 
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
 
-    <ul>
+(function() {
     
-      <li><a href="http://hanneslehmann.github.io/2014/11/jaspersoft/">Hello Hugo!</a></li>
     
-      <li><a href="http://hanneslehmann.github.io/2014/11/hello-hugo/">Hello Hugo!</a></li>
-    
-    </ul>
+    if (window.location.hostname == "localhost") 
+        return;
 
-  </div>
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'hanneslehmann';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the comments powered by <a href="http://disqus.com/?ref_noscript">Disqus.</a></noscript>
+</div>
+</div>
+
   </body>
 </html>

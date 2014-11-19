@@ -82,6 +82,8 @@
   
   
   
+  
+  
   <div class="post">
     <h1 class="post-title">
       <a href="http://hanneslehmann.github.io/2014/11/hello-hugo/">
@@ -101,11 +103,6 @@
 <h2 id="toc_0">Hugo</h2>
 
 <p>Here&rsquo;s a the link to <a href="http://gohugo.io/">Hugo</a>.</p>
-
-<p>I needed to remove the port &ldquo;&rdquo; which was attached in several URLs scattered through a bunch of files. Following command helped me with sed on linux to remove the string from all files.</p>
-
-<pre><code>find . -type f -not -iwholename '*.git*' -print0  | xargs -0 sed -i'' -e 's///'
-</code></pre>
 
 <p>I will optimize my build process (make file already created) and will post findings here and in GitHub.</p>
 
