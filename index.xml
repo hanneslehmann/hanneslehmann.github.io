@@ -37,6 +37,10 @@
 
 &lt;p&gt;A full cheat sheet can be found &lt;a href=&#34;https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet&#34;&gt;here&lt;/a&gt;
 or through &lt;a href=&#34;https://google.com/&#34;&gt;Google&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;toc_2&#34;&gt;Hosted on GitHub&lt;/h2&gt;
+
+&lt;p&gt;How a page in GitHub can be hosted is described &lt;a href=&#34;https://pages.github.com/&#34;&gt;here&lt;/a&gt;. It&amp;rsquo;s so easy and fast to publish pages via git pull/add/commit/push!&lt;/p&gt;
 </description>
     </item>
     
