@@ -80,6 +80,65 @@
 
       
   
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://hanneslehmann.github.io/2014/11/markdown_01/">
+        Markdown Workflow Part I
+      </a>
+    </h1>
+
+    <span class="post-date">Nov 20, 2014</span>
+
+    
+
+
+    
+
+<h2 id="toc_0">Markdown for documenting</h2>
+
+<p>I have created the first small bash script to help ease my Markdown workflow.</p>
+
+<p>Usage:</p>
+
+<pre><code>whatchme.sh file.md 'grep &quot;^#&quot; file.md' 
+</code></pre>
+
+<p>Here comes the script (can be found in my GitHub repository for cloning/forking as well!).</p>
+
+<pre><code>#!/bin/bash
+# Script by Hannes Lehmann
+# Use it, when you need it
+
+if (( $# &lt; 2 )); then
+    echo &quot;Not enough arguments passed to whatchme!&quot;
+    echo &quot;Provide the filename as first argument,&quot;
+    echo &quot;and the command to be executed as second argument.&quot;
+    echo &quot;example: whatchme.sh file.md 'grep something file.md'&quot;
+    exit 1
+fi
+
+while true    
+do
+   ATIME=`stat -c %Z $1`
+
+   if [[ &quot;$ATIME&quot; != &quot;$LTIME&quot; ]]
+   then    
+	clear
+       	eval $2
+       	LTIME=$ATIME
+   fi
+   sleep 1
+done 
+</code></pre>
+
+<p>What I do with this script is: run it in a separate / parallel shell to my editor (where I am editing the current markdown document) to have a fast overview of the chapters and their structure.</p>
+
+<p>The next day I will enhance the script with automated chapter numbering to increase the structural view.</p>
+
+  </div>
+  
+  
+  
   
   
   <div class="post">
