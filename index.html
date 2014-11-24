@@ -13,9 +13,9 @@
   <title> Hannes Lehmann </title>
 
   
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/poole.css">
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/syntax.css">
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/hyde.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/poole.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/hyde.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   
@@ -23,7 +23,7 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   
-  <link href="http://hanneslehmann.github.io/index.xml/" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
+  <link href="http://localhost:1313/index.xml/" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
@@ -45,7 +45,7 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <h1 class="brand"><a href="http://hanneslehmann.github.io">Hannes Lehmann</a></h1>
+      <h1 class="brand"><a href="http://localhost:1313">Hannes Lehmann</a></h1>
       <p class="lead">
        nterra Integration 
       </p>
@@ -60,9 +60,9 @@
 
 
     <ul class="sidebar-nav">
-      <li><a href="http://hanneslehmann.github.io/blog">Posts</a></li>
+      <li><a href="http://localhost:1313/blog">Posts</a></li>
       
-        <li><a href="http://hanneslehmann.github.io/about/">About </a></li>
+        <li><a href="http://localhost:1313/about/">About </a></li>
       
       <br/>
       
@@ -82,7 +82,75 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/markdown_01/">
+      <a href="http://localhost:1313/2014/11/kickstart_bw5proj/">
+        Kickstart BW5.12 Project
+      </a>
+    </h1>
+
+    <span class="post-date">Nov 24, 2014</span>
+
+    
+
+
+    
+
+<h2 id="toc_0">Kickstart BW5.12 Project</h2>
+
+<p>I have created the a small make file to speed up BusinessWorks Designer Project creation. Additionally it creates some sub-directories which helps keeping the project structure clean.</p>
+
+<p>I will possibly update the make file, so be sure to subscribe to the git repo!</p>
+
+<p>Usage:</p>
+
+<pre><code class="language-bash">make project='somename' 
+</code></pre>
+
+<p>Here comes the make file (can be found in my GitHub repository). It takes an existing bw project stored in a (hidden) directory under <em>.template</em> and copies it to the target project name. It then replaces the name in some files and creates some additional sub-directories.</p>
+
+<pre><code class="language-bash"># Makefile 
+# Created to speed up initialization of a TIBCO BW 5.12 project
+# by Hannes Lehmann
+#
+
+PROJ=${project}
+PROJDIR=
+DESIGNER_BASE=/data/tibco/designer/5.9
+
+run:    
+ifdef PROJ
+	@echo Creating skeleton for a new project called: $(project)
+	@mkdir -p ${project}/Schemas 
+	@mkdir -p ${project}/Processes
+	@mkdir -p ${project}/Services
+	@mkdir -p ${project}/Resources  
+	@cp -R .template/* $(PROJ)
+	@sed -i 's/1template1/${project}/g' ${project}/vcrepo.dat
+	@sed -i 's/1template1/${project}/g' ${project}/defaultVars/defaultVars.substvar
+else
+	@echo Nothing done, try to pass an argument project=
+endif
+
+launch:
+	cd $(DESIGNER_BASE)/bin/ &amp;&amp; $(DESIGNER_BASE)/bin/designer $(CURDIR)/$(PROJ)
+	cd $(DIR)
+</code></pre>
+
+<p>What I do with this script is: run it for creating a new BW project. Before you can use it, either you:</p>
+
+<ul>
+<li>create a project called &lsquo;1template1&rsquo; and change the directory to &lsquo;.template&rsquo;</li>
+<li>clone the git repo.</li>
+</ul>
+
+<p>Eventually I will add additional functionality to the script (possibly remove the dependency on the template project).</p>
+
+  </div>
+  
+  
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="http://localhost:1313/2014/11/markdown_01/">
         Markdown Workflow Part I
       </a>
     </h1>
@@ -100,12 +168,12 @@
 
 <p>Usage:</p>
 
-<pre><code>whatchme.sh file.md 'grep &quot;^#&quot; file.md' 
+<pre><code class="language-bash">whatchme.sh file.md 'grep &quot;^#&quot; file.md' 
 </code></pre>
 
-<p>Here comes the script (can be found in my GitHub repository for cloning/forking as well!).</p>
+<p>Here comes the script (can be found in my GitHub repository for cloning/forking as well!). I found most of it in a forum, thanks to that guys!</p>
 
-<pre><code>#!/bin/bash
+<pre><code class="language-bash">#!/bin/bash
 # Script by Hannes Lehmann
 # Use it, when you need it
 
@@ -143,7 +211,7 @@ done
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/hello-hugo/">
+      <a href="http://localhost:1313/2014/11/hello-hugo/">
         Hello Hugo!
       </a>
     </h1>

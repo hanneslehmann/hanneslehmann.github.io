@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Hannes Lehmann</title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://localhost:1313/tags/tibco/index.xml/</link>
+    <language>en-us</language>
+    <author>Hannes Lehmann</author>
+    <copyright>2014 Hannes Lehmann</copyright>
+    <updated>Mon, 24 Nov 2014 00:00:00 UTC</updated>
+    
+    
+    <item>
+      <title>Kickstart BW5.12 Project</title>
+      <link>http://localhost:1313/2014/11/kickstart_bw5proj/</link>
+      <pubDate>Mon, 24 Nov 2014 00:00:00 UTC</pubDate>
+      <author>Hannes Lehmann</author>
+      <guid>http://localhost:1313/2014/11/kickstart_bw5proj/</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Kickstart BW5.12 Project&lt;/h2&gt;
+
+&lt;p&gt;I have created the a small make file to speed up BusinessWorks Designer Project creation. Additionally it creates some sub-directories which helps keeping the project structure clean.&lt;/p&gt;
+
+&lt;p&gt;I will possibly update the make file, so be sure to subscribe to the git repo!&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;make project=&#39;somename&#39; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here comes the make file (can be found in my GitHub repository). It takes an existing bw project stored in a (hidden) directory under &lt;em&gt;.template&lt;/em&gt; and copies it to the target project name. It then replaces the name in some files and creates some additional sub-directories.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;# Makefile 
+# Created to speed up initialization of a TIBCO BW 5.12 project
+# by Hannes Lehmann
+#
+
+PROJ=${project}
+PROJDIR=
+DESIGNER_BASE=/data/tibco/designer/5.9
+
+run:    
+ifdef PROJ
+	@echo Creating skeleton for a new project called: $(project)
+	@mkdir -p ${project}/Schemas 
+	@mkdir -p ${project}/Processes
+	@mkdir -p ${project}/Services
+	@mkdir -p ${project}/Resources  
+	@cp -R .template/* $(PROJ)
+	@sed -i &#39;s/1template1/${project}/g&#39; ${project}/vcrepo.dat
+	@sed -i &#39;s/1template1/${project}/g&#39; ${project}/defaultVars/defaultVars.substvar
+else
+	@echo Nothing done, try to pass an argument project=
+endif
+
+launch:
+	cd $(DESIGNER_BASE)/bin/ &amp;amp;&amp;amp; $(DESIGNER_BASE)/bin/designer $(CURDIR)/$(PROJ)
+	cd $(DIR)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What I do with this script is: run it for creating a new BW project. Before you can use it, either you:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;create a project called &amp;lsquo;1template1&amp;rsquo; and change the directory to &amp;lsquo;.template&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;clone the git repo.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Eventually I will add additional functionality to the script (possibly remove the dependency on the template project).&lt;/p&gt;
+</description>
+    </item>
+    
+    
+  </channel>
+</rss>

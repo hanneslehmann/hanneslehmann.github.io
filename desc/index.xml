@@ -3,7 +3,7 @@
   <channel>
       <title>Hannes Lehmann</title>
       <generator uri="https://hugo.spf13.com">Hugo</generator>
-    <link>http://hanneslehmann.github.io/desc/index.xml/</link>
+    <link>http://localhost:1313/desc/index.xml/</link>
     <language>en-us</language>
     <author>Hannes Lehmann</author>
     <copyright>2014 Hannes Lehmann</copyright>

@@ -10,7 +10,7 @@
   
 
 
-  <title> Hello Hugo!  &middot; Hannes Lehmann </title>
+  <title> Kickstart BW5.12 Project  &middot; Hannes Lehmann </title>
 
   
   <link rel="stylesheet" href="http://localhost:1313/css/poole.css">
@@ -77,27 +77,60 @@
 
   <div class="content container">
     <div class="post">
-    <h1 class="post-title">Hello Hugo!</h1>
-    <span class="post-date">Nov 19, 2014</span>
+    <h1 class="post-title">Kickstart BW5.12 Project</h1>
+    <span class="post-date">Nov 24, 2014</span>
     
     
 
-<p>Hello from Hugo! And hello from Hannes! This is my first blog entry, realized thanks to Hugo; written in Markdown.</p>
+<h2 id="toc_0">Kickstart BW5.12 Project</h2>
 
-<h2 id="toc_0">Hugo</h2>
+<p>I have created the a small make file to speed up BusinessWorks Designer Project creation. Additionally it creates some sub-directories which helps keeping the project structure clean.</p>
 
-<p>Here&rsquo;s a the link to <a href="http://gohugo.io/">Hugo</a>.</p>
+<p>I will possibly update the make file, so be sure to subscribe to the git repo!</p>
 
-<p>I will optimize my build process (make file already created) and will post findings here and in GitHub.</p>
+<p>Usage:</p>
 
-<h2 id="toc_1">Showing off with Markdown</h2>
+<pre><code class="language-bash">make project='somename' 
+</code></pre>
 
-<p>A full cheat sheet can be found <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">here</a>
-or through <a href="https://google.com/">Google</a>.</p>
+<p>Here comes the make file (can be found in my GitHub repository). It takes an existing bw project stored in a (hidden) directory under <em>.template</em> and copies it to the target project name. It then replaces the name in some files and creates some additional sub-directories.</p>
 
-<h2 id="toc_2">Hosted on GitHub</h2>
+<pre><code class="language-bash"># Makefile 
+# Created to speed up initialization of a TIBCO BW 5.12 project
+# by Hannes Lehmann
+#
 
-<p>How a page in GitHub can be hosted is described <a href="https://pages.github.com/">here</a>. It&rsquo;s so easy and fast to publish pages via git pull/add/commit/push!</p>
+PROJ=${project}
+PROJDIR=
+DESIGNER_BASE=/data/tibco/designer/5.9
+
+run:    
+ifdef PROJ
+	@echo Creating skeleton for a new project called: $(project)
+	@mkdir -p ${project}/Schemas 
+	@mkdir -p ${project}/Processes
+	@mkdir -p ${project}/Services
+	@mkdir -p ${project}/Resources  
+	@cp -R .template/* $(PROJ)
+	@sed -i 's/1template1/${project}/g' ${project}/vcrepo.dat
+	@sed -i 's/1template1/${project}/g' ${project}/defaultVars/defaultVars.substvar
+else
+	@echo Nothing done, try to pass an argument project=
+endif
+
+launch:
+	cd $(DESIGNER_BASE)/bin/ &amp;&amp; $(DESIGNER_BASE)/bin/designer $(CURDIR)/$(PROJ)
+	cd $(DIR)
+</code></pre>
+
+<p>What I do with this script is: run it for creating a new BW project. Before you can use it, either you:</p>
+
+<ul>
+<li>create a project called &lsquo;1template1&rsquo; and change the directory to &lsquo;.template&rsquo;</li>
+<li>clone the git repo.</li>
+</ul>
+
+<p>Eventually I will add additional functionality to the script (possibly remove the dependency on the template project).</p>
 
     
 
