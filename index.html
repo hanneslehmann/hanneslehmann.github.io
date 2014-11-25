@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="">
 <head>
   <link href="http://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -7,15 +7,14 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-  
 
 
   <title> Hannes Lehmann </title>
 
   
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/poole.css">
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/syntax.css">
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/hyde.css">
+  <link rel="stylesheet" href="http://www.hannes-lehmann.com/css/poole.css">
+  <link rel="stylesheet" href="http://www.hannes-lehmann.com/css/syntax.css">
+  <link rel="stylesheet" href="http://www.hannes-lehmann.com/css/hyde.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   
@@ -23,7 +22,7 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   
-  <link href="http://hanneslehmann.github.io/index.xml/" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
+  <link href="http://www.hannes-lehmann.com/index.xml/" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
@@ -45,7 +44,7 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <h1 class="brand"><a href="http://hanneslehmann.github.io">Hannes Lehmann</a></h1>
+      <h1 class="brand"><a href="http://www.hannes-lehmann.com">Hannes Lehmann</a></h1>
       <p class="lead">
        nterra Integration 
       </p>
@@ -60,13 +59,26 @@
 
 
     <ul class="sidebar-nav">
-      <li><a href="http://hanneslehmann.github.io/blog">Posts</a></li>
       
-        <li><a href="http://hanneslehmann.github.io/about/">About </a></li>
-      
+
+     
+        	<li><a href="http://www.hannes-lehmann.com/blog_en">Posts</a></li>
+     
+
+
+     
+	    
+        	<li><a href="http://www.hannes-lehmann.com/about">About </a></li>
+      	     	
+     
+
       <br/>
       
     </ul>
+
+    <nav class="menu language-menu">
+	
+     </nav>
 
     <p class="footnote">powered by <a href="http://hugo.spf13.com">Hugo</a> <br/>
     &copy; 2014 Hannes Lehmann. All rights reserved.</p>
@@ -78,11 +90,14 @@
     <div class="content container">
 <div class="posts">
 
-      
+  
+
+
+
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/kickstart_bw5proj/">
+      <a href="http://www.hannes-lehmann.com/blog_en/kickstart_bw5proj_en/">
         Kickstart BW5.12 Project
       </a>
     </h1>
@@ -144,13 +159,31 @@ launch:
 
 <p>Eventually I will add additional functionality to the script (possibly remove the dependency on the template project).</p>
 
+<h2 id="toc_1">Best Practice for BW project structure</h2>
+
+<p>Create some folder insider your project collecting/grouping functions together. For example the Makefile above will create following directories:</p>
+
+<ul>
+<li>Schemas (for XSDs, WSDLs, etc.)</li>
+<li>Processes (put your bw processes here)</li>
+<li>Services (if any WebServices are created, collect them here)</li>
+<li>Resources (any http, jdbc or whatever else is needed)</li>
+</ul>
+
+<p>This is only a recommendation and a really flat hierarchy. Avoid to create to many folders/subdirs as it should still be usable (remember: some OSses/Systems don&rsquo;t like really long path names).</p>
+
   </div>
   
+
+
   
+
+
+
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/markdown_01/">
+      <a href="http://www.hannes-lehmann.com/blog_en/markdown_01_en/">
         Markdown Workflow Part I
       </a>
     </h1>
@@ -205,13 +238,37 @@ done
 
   </div>
   
+
+
   
+
+
+
   
+
+
   
+
+
+
+  
+
+
+  
+
+
+
+  
+
+
+  
+
+
+
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/hello-hugo/">
+      <a href="http://www.hannes-lehmann.com/blog_en/hello/">
         Hello Hugo!
       </a>
     </h1>
@@ -242,8 +299,15 @@ or through <a href="https://google.com/">Google</a>.</p>
 
   </div>
   
+
+
   
+
+
+
   
+
+
   
 </div>
 

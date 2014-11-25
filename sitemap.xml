@@ -2,33 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://hanneslehmann.github.io/</loc>
+    <loc>http://www.hannes-lehmann.com/</loc>
     <lastmod>2014-11-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://hanneslehmann.github.io/2014/11/kickstart_bw5proj/</loc>
+    <loc>http://www.hannes-lehmann.com/blog_en/kickstart_bw5proj_en/</loc>
     <lastmod>2014-11-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hanneslehmann.github.io/2014/11/markdown_01/</loc>
+    <loc>http://www.hannes-lehmann.com/blog_en/markdown_01_en/</loc>
     <lastmod>2014-11-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hanneslehmann.github.io/about/</loc>
+    <loc>http://www.hannes-lehmann.com/about</loc>
     <lastmod>2014-11-19T12:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hanneslehmann.github.io/2014/11/hello-hugo/</loc>
+    <loc>http://www.hannes-lehmann.com/de/about</loc>
+    <lastmod>2014-11-19T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.hannes-lehmann.com/de/</loc>
+    <lastmod>2014-11-19T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://www.hannes-lehmann.com/blog_en/hello/</loc>
     <lastmod>2014-11-19T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://hanneslehmann.github.io/desc/series-hugo101/</loc>
+    <loc>http://www.hannes-lehmann.com/desc/series-hugo101/</loc>
     <lastmod>2014-08-12T11:09:35+00:00</lastmod>
   </url>
   
