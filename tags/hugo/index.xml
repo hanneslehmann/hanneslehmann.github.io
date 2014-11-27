@@ -12,10 +12,10 @@
     
     <item>
       <title>Hello Hugo!</title>
-      <link>http://hanneslehmann.github.io/blog_en/hello/</link>
+      <link>http://hanneslehmann.github.io/2014/11/hello-hugo_en/</link>
       <pubDate>Wed, 19 Nov 2014 00:00:00 UTC</pubDate>
       <author>Hannes Lehmann</author>
-      <guid>http://hanneslehmann.github.io/blog_en/hello/</guid>
+      <guid>http://hanneslehmann.github.io/2014/11/hello-hugo_en/</guid>
       <description>
 
 &lt;p&gt;Hello from Hugo! And hello from Hannes! This is my first blog entry, realized thanks to Hugo; written in Markdown.&lt;/p&gt;

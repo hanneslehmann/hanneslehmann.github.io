@@ -12,10 +12,10 @@
     
     <item>
       <title>Kickstart BW5.12 Project</title>
-      <link>http://hanneslehmann.github.io/blog_en/kickstart_bw5proj_en/</link>
+      <link>http://hanneslehmann.github.io/2014/11/kickstart_bw5proj_en/</link>
       <pubDate>Mon, 24 Nov 2014 00:00:00 UTC</pubDate>
       <author>Hannes Lehmann</author>
-      <guid>http://hanneslehmann.github.io/blog_en/kickstart_bw5proj_en/</guid>
+      <guid>http://hanneslehmann.github.io/2014/11/kickstart_bw5proj_en/</guid>
       <description>
 
 &lt;h2 id=&#34;toc_0&#34;&gt;Kickstart BW5.12 Project&lt;/h2&gt;
@@ -87,10 +87,10 @@ launch:
     
     <item>
       <title>Markdown Workflow Part I</title>
-      <link>http://hanneslehmann.github.io/blog_en/markdown_01_en/</link>
+      <link>http://hanneslehmann.github.io/2014/11/markdown_01_en/</link>
       <pubDate>Thu, 20 Nov 2014 00:00:00 UTC</pubDate>
       <author>Hannes Lehmann</author>
-      <guid>http://hanneslehmann.github.io/blog_en/markdown_01_en/</guid>
+      <guid>http://hanneslehmann.github.io/2014/11/markdown_01_en/</guid>
       <description>
 
 &lt;h2 id=&#34;toc_0&#34;&gt;Markdown for documenting&lt;/h2&gt;
@@ -140,16 +140,12 @@ done
     
     
     
-    
-    
-    
-    
     <item>
       <title>Hello Hugo!</title>
-      <link>http://hanneslehmann.github.io/blog_en/hello/</link>
+      <link>http://hanneslehmann.github.io/2014/11/hello-hugo_en/</link>
       <pubDate>Wed, 19 Nov 2014 00:00:00 UTC</pubDate>
       <author>Hannes Lehmann</author>
-      <guid>http://hanneslehmann.github.io/blog_en/hello/</guid>
+      <guid>http://hanneslehmann.github.io/2014/11/hello-hugo_en/</guid>
       <description>
 
 &lt;p&gt;Hello from Hugo! And hello from Hannes! This is my first blog entry, realized thanks to Hugo; written in Markdown.&lt;/p&gt;
@@ -170,8 +166,6 @@ or through &lt;a href=&#34;https://google.com/&#34;&gt;Google&lt;/a&gt;.&lt;/p&g
 &lt;p&gt;How a page in GitHub can be hosted is described &lt;a href=&#34;https://pages.github.com/&#34;&gt;here&lt;/a&gt;. It&amp;rsquo;s so easy and fast to publish pages via git pull/add/commit/push!&lt;/p&gt;
 </description>
     </item>
-    
-    
     
     
   </channel>
