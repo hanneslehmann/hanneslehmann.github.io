@@ -12,9 +12,9 @@
   <title> Hannes Lehmann </title>
 
   
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/poole.css">
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/syntax.css">
-  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/hyde.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/poole.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/syntax.css">
+  <link rel="stylesheet" href="http://localhost:1313/css/hyde.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
 
   
@@ -22,7 +22,7 @@
   <link rel="shortcut icon" href="/favicon.ico">
 
   
-  <link href="http://hanneslehmann.github.io/index.xml/" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
+  <link href="http://localhost:1313/index.xml/" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
@@ -44,7 +44,7 @@
 <div class="sidebar">
   <div class="container sidebar-sticky">
     <div class="sidebar-about">
-      <h1 class="brand"><a href="http://hanneslehmann.github.io">Hannes Lehmann</a></h1>
+      <h1 class="brand"><a href="http://localhost:1313">Hannes Lehmann</a></h1>
       <p class="lead">
        nterra Integration 
       </p>
@@ -63,9 +63,9 @@
    
       
     
-	     <li><a href="http://hanneslehmann.github.io/blog">Posts</a></li>
+	     <li><a href="http://localhost:1313/blog">Posts</a></li>
 	    
-        	<li><a href="http://hanneslehmann.github.io/about">About </a></li>
+        	<li><a href="http://localhost:1313/about">About </a></li>
       	     	
      
 
@@ -95,7 +95,7 @@
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/12/jenkinstibco/">
+      <a href="http://localhost:1313/2014/12/jenkinstibco/">
         Continous Integration BW5.12/Jenkins - Part I
       </a>
     </h1>
@@ -251,176 +251,7 @@ For more specific explanations check the Tibco Documentation!</p>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/12/jenkinstibco2/">
-        Continous Integration BW5.12/Jenkins
-      </a>
-    </h1>
-
-    <span class="post-date">Dec 3, 2014</span>
-
-    
-
-
-    
-
-<p>The workflow of a Continous Integration with BW would be (GIT is used in this case, same thing can be done with SVN or other source control tools as well):</p>
-
-<p>Developer:</p>
-
-<ul>
-<li>Tibco Designer &mdash;-&gt; create &amp; save &mdash;-&gt; Project</li>
-<li>Project &mdash; push to repo &mdash; &gt; GIT</li>
-</ul>
-
-<p>Jenkins:</p>
-
-<ul>
-<li>GIT &mdash; clone project locally to&mdash;&gt; project_dir</li>
-<li>buildear &mdash; create deployment artifact to &mdash;&gt; project_dir/app.ear</li>
-<li>AppManage &mdash; extract config from ear into &mdash;&gt;  project_dir/app_config.xml</li>
-<li>Script (Ant, bash,..) &mdash; modify configs within &mdash;&gt; project_dir/app_config.xml</li>
-<li>AppManage &mdash; combine ear and configs &mdash;&gt; deploy to BW domain</li>
-<li>GIT? &mdash;&gt; commit/push deployment artifacts together with config</li>
-</ul>
-
-<p>The Jenkins job can be run manually, scheduled or, if configured correctly, with the source control system, on every check-in/push.</p>
-
-<p>This article covers only a really abstraced view on the process, which can grow to complexity. Only some random thoughts what has to be clearly defined before setting up CI (without beeing complete):</p>
-
-<ul>
-<li>The CLI tool chain from TIBCO is needed on the same box, where the applications are build (either on a Jenkins bot, or some remote scripting&hellip;), how can this be achieved (Licences..?)</li>
-<li>Build strategy: how is the branching/staging done? So, we need to tell Jenkins what to check out from where/when (on every build?) Manually if new branches are created?</li>
-<li>The target environment: how many staging boxes are there (Dev, Test, UAT, Prod)? Should the build be done automatically on which ones? Is there access from Jenkins (or it&rsquo;s bots to all the needed machines?)</li>
-<li>Any quality assurance before deployment? Source code checks (e.g. naming conventions, comments,&hellip;), automated testing?</li>
-<li>What happens in a case of failure? What would be the way to recover a (former) working version of the application?</li>
-<li>How can new jobs be added to Jenkins? Any Administrator/Ops Team? Automated?</li>
-<li>Any automated reports needed?</li>
-</ul>
-
-<p>Following steps have been done on a Windows Box (AWS Windows Server 2012).</p>
-
-<h2 id="toc_0">Jenkins installation</h2>
-
-<ol>
-<li>Go to Jenkins Homepage: <a href="http://jenkins-ci.org/">http://jenkins-ci.org/</a></li>
-<li>Download Windows Package / Unzip and start &gt;setup.exe&lt;</li>
-<li>Choose the installation directory and after setup is completed on my box a browser page pops up showing jenkins waiting for jobs.</li>
-</ol>
-
-<p><img src="pictures/jenkinstibco/win1.jpg" alt="Installation of Jenkins on Windows completed" title="Jenkins on Windows" />
-</p>
-
-<p>If you need to change the port of Jenkins standard configuration, it can be changed by editing the jenkins.xml file (change <strong>httpPort=8080</strong>) which is located in the installation directory (choosen during installation).</p>
-
-<p><img src="pictures/jenkinstibco/win2.png" alt="Config file" title="Jenkins config on Windows" />
-</p>
-
-<p>This was my original config - useful to increase heapsize etc:</p>
-
-<pre><code class="language-xml">&lt;service&gt;
-  &lt;id&gt;jenkins&lt;/id&gt;
-  &lt;name&gt;Jenkins&lt;/name&gt;
-  &lt;description&gt;This service runs Jenkins continuous integration system.&lt;/description&gt;
-  &lt;env name=&quot;JENKINS_HOME&quot; value=&quot;%BASE%&quot;/&gt;
-  &lt;!--
-    if you'd like to run Jenkins with a specific version of Java, specify a full path to java.exe.
-    The following value assumes that you have java in your PATH.
-  --&gt;
-  &lt;executable&gt;%BASE%\jre\bin\java&lt;/executable&gt;
-  &lt;arguments&gt;-Xrs -Xmx256m -Dhudson.lifecycle=hudson.lifecycle.WindowsServiceLifecycle -jar &quot;%BASE%\jenkins.war&quot; --httpPort=8080&lt;/arguments&gt;
-  &lt;!--
-    interactive flag causes the empty black Java window to be displayed.
-    I'm still debugging this.
-  &lt;interactive /&gt;
-  --&gt;
-  &lt;logmode&gt;rotate&lt;/logmode&gt;
-
-  &lt;onfailure action=&quot;restart&quot; /&gt;
-&lt;/service&gt;
-</code></pre>
-
-<p>After applying any change, restart the Jenkins Service using e.g. the Windows Task Manager. For this article I changed the Jenkins Port to 6060.</p>
-
-<p>For more details (e.g. issues or advanced config, such as installing jenkins as a slave, check out: <a href="https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+as+a+Windows+service">the jenkins wiki</a>.</p>
-
-<h2 id="toc_1">Preparation of BW5.12 scripted deployment</h2>
-
-<p>Within TIBCO BusinessWorks 5.12 ear-files (deployable artifact) are created via the TIBCO Utility/Script BuildEar. The deployment is done via the AppManage Utility. Both are available after installation of BW TRA.</p>
-
-<p>The AppManage utility must be run on a machine that is part of the administration domain you are updating.</p>
-
-<p>Example manual steps for deploying an application:</p>
-
-<pre><code class="language-bash">AppManage -deploy -ear D:\jenkins\ears\deployment\helloworld_service2.ear -deployconfig D:\jenkins\ears\deployment\hello_service-bw5_dev.xml -cred D:\jenkins\cred.txt -app TestServices/hello-service -domain bw5_dev
-</code></pre>
-
-<p>In this case we would deploy &amp; start a service within the TestServices folder. The AppManage Tool is located in the <strong>tra</strong> folder of your installation (e.g. C:\tibco\tra\5.9\bin).</p>
-
-<p>The ear file can be created automatically via the build tool:</p>
-
-<pre><code class="language-bash">buildear.exe -s -ear /helloworld_service.archive -o D:\jenkins\ears\deployment\helloworld_service2.ear -p C:\Users\Bob\Documents\bw5\helloworld_service
-</code></pre>
-
-<p>Options:</p>
-
-<ul>
-<li>ear) takes the name of the project archive file, don&rsquo;t forget the leading slasch!</li>
-<li>o) is the ouptut directory</li>
-<li>p) is the directory of the project (where the archive file is located)</li>
-</ul>
-
-<p>The buildear is located in the same directory as the AppManage Tool.
-For more specific explanations check the Tibco Documentation!</p>
-
-<p>Before deploying, as mentioned before, the config file has to be created (by AppManage) and adjusted to the target environment where the deployment will happen (usually a clever script).</p>
-
-<p>Export the config of an existing ear.</p>
-
-<pre><code class="language-bash">AppManage -export -ear  D:\jenkins\ears\deployment\helloworld_service2.ear -out D:\jenkins\ears\deployment\helloworld_service2.xml
-</code></pre>
-
-<p>Or, in any case following command can be useful to export a current config from the Admin, it helps to understand what has to be changed inside the config file&hellip;</p>
-
-<pre><code class="language-bash">AppManage -export -app TestServices/helloworld_service -out D:/jenkins/helloworld_service.xml -domain bw5_dev -cred D:\jenkins\cred.txt
-</code></pre>
-
-<hr />
-
-<h2 id="toc_2">Linux</h2>
-
-<p>This guideline was created using CentOS 7 (should be similar on RedHat/Fedora). For windows version see below.</p>
-
-<pre><code class="language-bash">[bob@tibcobw-dev tibco_jenkins]$ java -version
-java version &quot;1.7.0_65&quot;
-OpenJDK Runtime Environment (rhel-2.5.1.2.el7_0-x86_64 u65-b17)
-OpenJDK 64-Bit Server VM (build 24.65-b04, mixed mode)
-</code></pre>
-
-<p>Download the RedHat compatible Jenkins repository running following command (as root, either with sudo or by su), which downloads the repo info for yum:</p>
-
-<pre><code class="language-bash">[root@tibcobw-dev tibco_jenkins]# wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
-</code></pre>
-
-<p>and then (again as root)</p>
-
-<pre><code class="language-bash">[root@tibcobw-dev tibco_jenkins]# rpm --import http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
-[root@tibcobw-dev tibco_jenkins]# yum install jenkins
-</code></pre>
-
-<hr />
-
-  </div>
-  
-
-
-  
-
-
-
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/cem_01_en/">
+      <a href="http://localhost:1313/2014/11/cem_01_en/">
         Customer experience management
       </a>
     </h1>
@@ -452,7 +283,7 @@ They adress challenges of our new and modern world:</p>
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/kickstart_bw5proj_en/">
+      <a href="http://localhost:1313/2014/11/kickstart_bw5proj_en/">
         Kickstart BW5.12 Project
       </a>
     </h1>
@@ -538,7 +369,7 @@ launch:
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/markdown_01_en/">
+      <a href="http://localhost:1313/2014/11/markdown_01_en/">
         Markdown Workflow Part I
       </a>
     </h1>
@@ -609,7 +440,7 @@ done
   
   <div class="post">
     <h1 class="post-title">
-      <a href="http://hanneslehmann.github.io/2014/11/hello-hugo_en/">
+      <a href="http://localhost:1313/2014/11/hello-hugo_en/">
         Hello Hugo!
       </a>
     </h1>
@@ -646,5 +477,8 @@ or through <a href="https://google.com/">Google</a>.</p>
 </div>
 
 
-  </body>
+  <script>document.write('<script src="http://'
+        + (location.host || 'localhost').split(':')[0]
+		+ ':1313/livereload.js?mindelay=10"></'
+        + 'script>')</script></body>
 </html>
