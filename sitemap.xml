@@ -2,38 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://hanneslehmann.github.io/</loc>
     <lastmod>2014-12-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/2014/12/jenkinstibco/</loc>
+    <loc>http://hanneslehmann.github.io/2014/12/jenkinstibco/</loc>
     <lastmod>2014-12-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/2014/11/cem_01_en/</loc>
+    <loc>http://hanneslehmann.github.io/2014/11/cem_01_en/</loc>
     <lastmod>2014-11-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/2014/11/kickstart_bw5proj_en/</loc>
+    <loc>http://hanneslehmann.github.io/2014/11/kickstart_bw5proj_en/</loc>
     <lastmod>2014-11-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/2014/11/markdown_01_en/</loc>
+    <loc>http://hanneslehmann.github.io/2014/11/markdown_01_en/</loc>
     <lastmod>2014-11-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/about</loc>
+    <loc>http://hanneslehmann.github.io/about</loc>
     <lastmod>2014-11-19T12:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://localhost:1313/2014/11/hello-hugo_en/</loc>
+    <loc>http://hanneslehmann.github.io/2014/11/hello-hugo_en/</loc>
     <lastmod>2014-11-19T00:00:00+00:00</lastmod>
   </url>
   
