@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+      <title>Hannes Lehmann</title>
+      <generator uri="https://hugo.spf13.com">Hugo</generator>
+    <link>http://hanneslehmann.github.io/de/tags/markdown/index.xml/</link>
+    <language>de-De</language>
+    <author>Hannes Lehmann</author>
+    <copyright>2014 Hannes Lehmann</copyright>
+    <updated>Thu, 20 Nov 2014 00:00:00 UTC</updated>
+    
+    
+    <item>
+      <title>Markdown Workflow Part I</title>
+      <link>http://hanneslehmann.github.io/de/2014/11/markdown_01_en/</link>
+      <pubDate>Thu, 20 Nov 2014 00:00:00 UTC</pubDate>
+      <author>Hannes Lehmann</author>
+      <guid>http://hanneslehmann.github.io/de/2014/11/markdown_01_en/</guid>
+      <description>
+
+&lt;h2 id=&#34;toc_0&#34;&gt;Markdown for documenting&lt;/h2&gt;
+
+&lt;p&gt;I have created the first small bash script to help ease my Markdown workflow.&lt;/p&gt;
+
+&lt;p&gt;Usage:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;whatchme.sh file.md &#39;grep &amp;quot;^#&amp;quot; file.md&#39; 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here comes the script (can be found in my GitHub repository for cloning/forking as well!). I found most of it in a forum, thanks to that guys!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-bash&#34;&gt;#!/bin/bash
+# Script by Hannes Lehmann
+# Use it, when you need it
+
+if (( $# &amp;lt; 2 )); then
+    echo &amp;quot;Not enough arguments passed to whatchme!&amp;quot;
+    echo &amp;quot;Provide the filename as first argument,&amp;quot;
+    echo &amp;quot;and the command to be executed as second argument.&amp;quot;
+    echo &amp;quot;example: whatchme.sh file.md &#39;grep something file.md&#39;&amp;quot;
+    exit 1
+fi
+
+while true    
+do
+   ATIME=`stat -c %Z $1`
+
+   if [[ &amp;quot;$ATIME&amp;quot; != &amp;quot;$LTIME&amp;quot; ]]
+   then    
+	clear
+       	eval $2
+       	LTIME=$ATIME
+   fi
+   sleep 1
+done 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What I do with this script is: run it in a separate / parallel shell to my editor (where I am editing the current markdown document) to have a fast overview of the chapters and their structure.&lt;/p&gt;
+
+&lt;p&gt;The next day I will enhance the script with automated chapter numbering to increase the structural view.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+  </channel>
+</rss>
