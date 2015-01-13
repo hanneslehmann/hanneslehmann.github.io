@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+
+
+  <title> Continous Integration BW5.12/Jenkins - Part II  &middot; Hannes Lehmann </title>
+
+  
+  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/poole.css">
+  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/syntax.css">
+  <link rel="stylesheet" href="http://hanneslehmann.github.io/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  <link href="" rel="alternate" type="application/rss+xml" title="Hannes Lehmann" />
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
+
+  <script src="//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ['Raleway']
+      }
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <h1 class="brand"><a href="http://hanneslehmann.github.io">Hannes Lehmann</a></h1>
+      <p class="lead">
+       nterra Integration 
+      </p>
+    </div>
+
+      <a href="https://twitter.com/tibco_nterra" target=_new><i class="fa fa-twitter-square"></i></a>&nbsp;&nbsp;
+      <a href="https://de.linkedin.com/pub/hannes-lehmann/8/376/758" target=_new><i class="fa fa-linkedin-square"></i></a>&nbsp;&nbsp;
+      
+      <a href="https://github.com/hanneslehmann/" target=_new><i class="fa fa-github-square"></i></a>&nbsp;&nbsp;
+      <a href="https://www.xing.com/profile/Hannes_Lehmann" target=_new><i class="fa fa-xing-square"></i></a>&nbsp;&nbsp;
+      <a href="https://tibbr.tibcommunity.com/tibbr/#!/users/22557" target=_new><i class="fa fa-tibbr-square"></i></a>
+
+
+    <ul class="sidebar-nav">
+
+   
+      
+    
+	     <li><a href="http://hanneslehmann.github.io/blog">Posts</a></li>
+	    
+        	<li><a href="http://hanneslehmann.github.io/about">About </a></li>
+      	     	
+     
+
+      <br/>
+      
+    </ul>
+
+    <nav class="menu language-menu">
+	
+     </nav>
+
+
+    <p class="footnote">powered by <a href="http://hugo.spf13.com">Hugo</a> <br/>
+    &copy; 2015 Hannes Lehmann. All rights reserved.</p>
+    
+  </div>
+</div>
+
+
+  <div class="content container">
+    <div class="post">
+    <h1 class="post-title">Continous Integration BW5.12/Jenkins - Part II</h1>
+    <span class="post-date">Jan 13, 2015</span>
+    
+    
+
+<p>That&rsquo;s the second part for the topic &ldquo;Continous Integration BW5.12/Jenkins&rdquo;</p>
+
+<p>This post describes how to pull/clone a GIT repository with Jenkins, and run to CLI commands to build and deploy a TIBCO BW process. The first part can be found <a href="http://hanneslehmann.github.io/2014/12/jenkinstibco/">here</a>, describing the CLI commands and giving a short overview of the Jenkins install process.</p>
+
+<p>All steps are done on an AWS Windows Server 2012 box, using BW (5.12), TRA (5.9), the latest Jenkins (1.596) and GIT (1.9.5).</p>
+
+<p>As already mentioned, I will use GIT in this case as SCM (Source Code Management) to make things more interesting (you could leave SCM out and let Jenkins build directly from your local dir) we need to download Git from <a href="http://git-scm.com/download/win">here</a> and install it (leaving all default values). While writing this post version 1.9.5 of Git was the actual one.</p>
+
+<h3 id="toc_0">Configure Jenkins to pull or clone a GIT repo</h3>
+
+<p>Install Jenkins Git Plugin from <a href="https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin">here</a>.</p>
+
+<p>Now Jenkins needs to be told, where to find git (Manage Jenkins-&gt;Configure System, or <a href="http://localhost:6060/configure">http://localhost:6060/configure</a> - remember to change the port to reflect your configuration).</p>
+
+<p>If you get the error message &ldquo;There&rsquo;s no such executable git.exe in PATH&rdquo; you have to enter the complete path to include your git executable (on my machine: &ldquo;C:\Program Files (x86)\Git\bin\git.exe&rdquo;) or update your PATH variable.</p>
+
+<p><img src="/jenkinstibco/gitjenkins.png" alt="Git Jenkins Setup" />
+</p>
+
+<p>I will not dive deeper in detail how to integrate GIT with Jenkins, as there are already enough tutorials covering this topic (e.g. <a href="http://sanketdangi.com/post/62740311628/integrate-jenkins-github-trigger-build-process">http://sanketdangi.com/post/62740311628/integrate-jenkins-github-trigger-build-process</a>). In short steps:</p>
+
+<ul>
+<li>create new freestyle project in Jenkins</li>
+<li>choose Git as SCM</li>
+<li>Enter the needed config (repo-URL, credentials)</li>
+</ul>
+
+<p><img src="/jenkinstibco/gitjobjenkins.png" alt="Git Job Jenkins Setup" />
+</p>
+
+<p>After creating some content in the repo, Jenkins should now be able to run the job (it only downloads content of the repo). Just try it to make sure the communication from Jenkins to GitHub.com works.</p>
+
+<p>We will skip the part &ldquo;trigger builds by commit/push&rdquo;. Triggering jobs by commits would mean, that there is an access to your Jenkins URL from the outside (if you are using e.g. GitHub.com). I will check this out in an additional post, at the moment I am happy scheduling jobs manually or time triggered (as Jenkins offers).</p>
+
+<p><img src="/jenkinstibco/gitsuccess1.png" alt="Git Job Jenkins Download success" />
+</p>
+
+<p>So, now let&rsquo;s add some build steps&hellip;</p>
+
+<p>These steps are highly dependend on your repo structure:
+* will every BW project has it own GIT repo?
+* will the whole BW development happen in one GIT repo?
+* or any other organizational structures (team, milestone, project, &hellip;)</p>
+
+<p>As well you will need some thoughts about naming convention of the repos.</p>
+
+<hr />
+
+<p>Let&rsquo;s make a switch to the other end, while you are thinking about the above mentioned questions, we will find out how to check-in / push an example BW project to the Github repo.</p>
+
+<h3 id="toc_1">Push source code to SCM</h3>
+
+<p>As I created a github repo and I have already a bw project, I need to init git in the existing bw project (the parent folder of the archive file, not directly the same dir!).</p>
+
+<pre><code class="language-bash">C:\Users\User\Documents\bw5&gt;git init
+Initialized empty Git repository in C:/Users/User/Documents/bw5/.git/
+
+C:\Users\User\Documents\bw5&gt;git remote add origin https://github.com/hanneslehmann/integration_gitjenkins.git
+
+C:\Users\User\Documents\bw5&gt;git config --global user.email &quot;hannes.lehmann@nterra.com&quot;
+
+C:\Users\User\Documents\bw5&gt;git config --global user.name &quot;Hannes&quot;
+
+</code></pre>
+
+<p>Now you can use the standard git procedure (add/commit/push) to upload your code to the SCM.</p>
+
+<p>To make thinks more visible, I installed a GUI for the source code handling called <a href="http://www.sourcetreeapp.com/download/">SourceTree</a></p>
+
+<h3 id="toc_2">Configure build job</h3>
+
+<p>For the job we re-configure the workspace path under the button &ldquo;advanced&rdquo; of the build job (I had an already running job for testing the setup, I will re-cycle this).</p>
+
+<p><img src="/jenkinstibco/jenkinsworkspaceconf.png" alt="Add build step" />
+</p>
+
+<p>Now, if you run the job, the content (the BW project) should be downloaded successfully to the defined folder.</p>
+
+<p>Let&rsquo;s build the ear file!</p>
+
+<p>I am doing this with normal windows commands, as shown in Part I. No ant, no maven (at the moment).</p>
+
+<p><img src="/jenkinstibco/jenkinsbuildstep.png" alt="Add build step" />
+</p>
+
+<p>We choose Execute Windows batch command and insert the command line we previously tested:</p>
+
+<pre><code class="language-bash">cd C:\tibco\tra\5.9\bin\buildear.exe -s -ear /helloworld_service.archive -o C:\jenkins\ears\helloworld_service.ear -p C:\jenkins\workspace\hello_world\helloworld_service
+</code></pre>
+
+<p><img src="/jenkinstibco/jenkinsbuildstepadd.png" alt="Add build step, configure" />
+</p>
+
+<p>Pitfall: the buildear utility does not like any other files in the directory (even the hidden &ldquo;.git&rdquo; directory, or the README.md hurts! Be careful in planning your repo structure!)</p>
+
+<p>Now we can hit the Jenkins build icon and when everything was configured properly, the ear file is build!</p>
+
+<p>Sample Jenkins console output</p>
+
+<pre><code class="language-bash">Started by user admin
+ &gt; C:\Program Files (x86)\Git\bin\git.exe rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ &gt; C:\Program Files (x86)\Git\bin\git.exe config remote.origin.url https://github.com/hanneslehmann/integration_gitjenkins.git # timeout=10
+Fetching upstream changes from https://github.com/hanneslehmann/integration_gitjenkins.git
+ &gt; C:\Program Files (x86)\Git\bin\git.exe --version # timeout=10
+using .gitcredentials to set credentials
+ &gt; C:\Program Files (x86)\Git\bin\git.exe config --local credential.helper store --file=\&quot;C:\Windows\TEMP\git8329605896234644724.credentials\&quot; # timeout=10
+ &gt; C:\Program Files (x86)\Git\bin\git.exe fetch --tags --progress https://github.com/hanneslehmann/integration_gitjenkins.git +refs/heads/*:refs/remotes/origin/*
+ &gt; C:\Program Files (x86)\Git\bin\git.exe config --local --remove-section credential # timeout=10
+ &gt; C:\Program Files (x86)\Git\bin\git.exe rev-parse &quot;refs/remotes/origin/master^{commit}&quot; # timeout=10
+ &gt; C:\Program Files (x86)\Git\bin\git.exe rev-parse &quot;refs/remotes/origin/origin/master^{commit}&quot; # timeout=10
+Checking out Revision c3c0893b9d4b81398a8f53c77a3c157b60275ab9 (refs/remotes/origin/master)
+Unable to auto-install JDK until the license is accepted.
+ &gt; C:\Program Files (x86)\Git\bin\git.exe config core.sparsecheckout # timeout=10
+ &gt; C:\Program Files (x86)\Git\bin\git.exe checkout -f c3c0893b9d4b81398a8f53c77a3c157b60275ab9
+ &gt; C:\Program Files (x86)\Git\bin\git.exe rev-list c3c0893b9d4b81398a8f53c77a3c157b60275ab9 # timeout=10
+Unable to auto-install JDK until the license is accepted.
+[hello_world] $ cmd /c call C:\Windows\TEMP\hudson3427319450101485603.bat
+
+C:\jenkins\workspace\hello_world&gt;cd C:\tibco\tra\5.9\bin\ 
+
+C:\tibco\tra\5.9\bin&gt;buildear.exe -s -ear /helloworld_service.archive -o C:\jenkins\ears\helloworld_service.ear -p C:\jenkins\workspace\hello_world\helloworld_service 
+Starting up...
+
+Enterprise Archive File has built correctly.
+Ear created in: C:\jenkins\ears\helloworld_service.ear
+
+C:\tibco\tra\5.9\bin&gt;exit 0 
+Finished: SUCCESS
+
+</code></pre>
+
+<h3 id="toc_3">Create the deployment job</h3>
+
+<p>After this, I can create a second job (I created a copy of the first job and removed the SCM part), to get the deployment done. You could do everything in one job, but possibly you have multiple environments and you want to build the ear file undependent from the deployment.</p>
+
+<p>Hint: use a naming convention / views in Jenkins to organize all your jobs!</p>
+
+<p>The deployment job doesn&rsquo;t need any configuration besides the &ldquo;Build Step/Execute Windows Command&rdquo; with following data (valid for my configuration):</p>
+
+<pre><code class="language-bash">cd C:\tibco\tra\5.9\bin\
+AppManage -deploy -ear C:\jenkins\ears\helloworld_service.ear -deployconfig C:\jenkins\configs\hello_service-bw5_dev.xml -cred C:\jenkins\configs\cred_dev.txt -app TestServices/hello-service -domain bw5_dev
+</code></pre>
+
+<p>Deployment, output of Jenkins:</p>
+
+<pre><code class="language-bash">Started by user admin
+BuildingUnable to auto-install JDK until the license is accepted.
+ in workspace C:\jenkins\workspace\hello_world
+Unable to auto-install JDK until the license is accepted.
+[hello_world] $ cmd /c call C:\Windows\TEMP\hudson3803253491767647451.bat
+
+C:\jenkins\workspace\hello_world&gt;cd C:\tibco\tra\5.9\bin\ 
+
+C:\tibco\tra\5.9\bin&gt;AppManage -deploy -ear C:\jenkins\ears\helloworld_service.ear -deployconfig C:\jenkins\configs\hello_service-bw5_dev.xml -cred C:\jenkins\configs\cred_dev.txt -app TestServices/hello-service -domain bw5_dev 
+Checking if master server is responding ...
+Finished checking
+Initializing ...
+Finished initialization
+Loading archive ...
+Finished loading archive
+Configuring application ...
+Finished configuring application
+Deploying application ...
+
+INFO : Received AgentInitialMsg: AgentInitialMsg [Agent=WIN-881H4D8KL83:none:bw5_dev:1421157162458:30] ## Tue Jan 13 15:09:57 CET 2015 ## 
+Instance helloworld_service created succesfully
+
+Finished deploying application
+Finished successfully in 37 seconds
+
+C:\tibco\tra\5.9\bin&gt;exit 0 
+Finished: SUCCESS
+
+</code></pre>
+
+<p>Let&rsquo;s check the TIBCO Admin GUI:</p>
+
+<p><img src="/jenkinstibco/runningbwservice.png" alt="Admin GUI running service" />
+</p>
+
+<p>It worked!</p>
+
+<p>From here: AppManage fails, if there is already a process with the same name. For update/upgrading existing processes, and the right packaging strategy, please refer to TIBCO guidelines!</p>
+
+<p>I will follow up to add some more complexity, e.g. change some global variables during deployment.</p>
+
+<p>As usual - if you have suggestions for more details, errors in text, just let me know, please!</p>
+
+    
+
+     
+	
+    <div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost") 
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'hanneslehmann';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the comments powered by <a href="http://disqus.com/?ref_noscript">Disqus.</a></noscript>
+</div>
+</div> 
+
+</body>w
+</html>
